@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
-    <script src="http://paperjs.org/assets/js/jquery.js"></script>
-    <script src="http://paperjs.org/assets/js/paper.js"></script>
-    <script src="http://paperjs.org/assets/js/scripts.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="all" name="robots" />
     <title>Data Mechanics</title>
     <style>
 @font-face {
@@ -35,185 +32,161 @@
   font-style: normal;
   font-weight: normal;
 }
-
-html { }
-html, body { margin: 0; height: 100%; }
-body { background: #fff; margin: 0; }
-/* body.fullscreen { overflow: hidden; } */
-body.fullscreen article {
-  width: auto;
-  position: absolute; overflow: hidden;
-  left: 0; top: 0; right: 0; bottom: 0;
-  margin-bottom: 0; padding: 0;
-}
-body.fullscreen article .paperscript { height:100%; margin-bottom:0; }
-body.fullscreen article .canvas, body.fullscreen article canvas[resize] { width: 100%; height: 100%; position:fixed; }
-
-h2 { color:#888888; font-family:Benton-Sans-Light; }
-.left { margin-left:95px; }
-#content { padding-top:15px; padding-bottom:30px; margin:0 auto; }
-.section { width:650px; padding-top:5px; padding-bottom:15px; font-family:Benton-Sans-Regular; font-size:14px; }
-#footer { color:#FFFFFF; font-family:Benton-Sans-Regular; font-size:12px; }
-#footer a { text-decoration:none; color:#FFFFFF; }
-#footer a:hover { text-decoration:underline; }
+html, body { height:100%; margin:0; color:#FFFFFF; font-family:Benton-Sans-Light; }
+/* body { overflow:hidden; } */
+body #background { position:absolute; top:0; left:0; right:0; bottom:0; width:auto; overflow:hidden; margin-bottom:0; padding:0; }
+body #background .paperscript { height:100%; margin-bottom:0; }
+body #background .canvas, body #background canvas[resize] { position:fixed; z-index:-1; width:100%; height:100%; }
+body #foreground { position:absolute; top:130px; z-index:100; width:100%; margin-left:0 auto; }
+body #foreground .left { margin-left:95px; }
+body #foreground #title { margin-left:91px; padding-bottom:5px; font-size:50px; }
+body #foreground #description { width:650px; padding-bottom:40px; font-size:16px; }
+body #foreground #sheet { margin:0 auto; padding-bottom:40px; border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; color:#000000; background-color:white; }
+body #foreground #sheet .section { width:650px; padding-top:20px; font-family:Benton-Sans-Regular; font-size:14px; }
+body #foreground #sheet .section h2 { color:#888888; font-family:Benton-Sans-Light; }
+body #foreground #sheet .section ul { list-style:none; padding:8px 0px 8px 0px; margin:0; }
+body #foreground #sheet .section li { padding-left:1.5em; text-indent:-1em; }
+body #foreground #sheet .section li:before { content:"4"; color:#888888; font-family:"Webdings"; }
+body #foreground #sheet .section a { color:#4E759A; text-decoration:none; }
+body #foreground #sheet .section a:hover { text-decoration:underline; }
+body #foreground #footer { height:80px; padding-top:15px; font-family:Benton-Sans-Regular; font-size:12px; }
+body #foreground #footer a { color:#FFFFFF; text-decoration:none; }
+body #foreground #footer a:hover { text-decoration:underline; }
     </style>
+    <script src="http://paperjs.org/assets/js/jquery.js"></script>
+    <script src="http://paperjs.org/assets/js/paper.js"></script>
+    <script src="http://paperjs.org/assets/js/scripts.js"></script>
   </head>
-  <body class="fullscreen">
-    <article><div class="paperscript">
-<script type="text/paperscript" canvas="canvas-1">
-function randInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+  <body>
+    <div id="background">
+      <div class="paperscript">
+        <script type="text/paperscript" canvas="canvas-1">
+          var ticks = 0;
+          var paths = [];
+          var raster = new Raster('archnet.jpg');
+          var loaded = false;
 
-var paths = [];
+          raster.on('load', function() { loaded = true; onResize(); });
+          raster.visible = false;
 
-var raster = new Raster('archnet.jpg');
-var loaded = false;
+          function divide(self, force) {
+            if (force == null)
+              self = this;
 
-raster.on('load', function() { loaded = true; onResize();});
+            if (!loaded)
+              return;
 
-var ticks = 0;
+            var size = self.bounds.size.clone();
+            var isLandscape = size.width > size.height;
+          
+            if (size.width < 2 || size.height < 2)
+              return;
 
-// Make the raster invisible:
-raster.visible = false;
+            // If the path is in landscape orientation, we're going to
+            // split the path horizontally, otherwise vertically.
+            size /= isLandscape ? [2, 1] : [1, 2];
 
-function divide(self, force) {
-  // Can be called directly on object or used
-  // as a method.
-  //if (self == null)
-  if (force == null)
-    self = this;
+            var path = new Path.Rectangle({
+              point: self.bounds.topLeft.floor(),
+              size: size.ceil(),
+              onMouseMove: move
+            });
+            path.fillColor = raster.getAverageColor(path);
+            paths.push(path);
 
-  if (!loaded)
-    return;
+            var path = new Path.Rectangle({
+              point: isLandscape ? self.bounds.topCenter.ceil() : self.bounds.leftCenter.ceil(),
+              size: size.floor(),
+              onMouseMove: move
+            });
+            path.fillColor = raster.getAverageColor(path);
+            paths.push(path);
 
-  var size = self.bounds.size.clone();
-  var isLandscape = size.width > size.height;
-  
-  if (size.width < 2 || size.height < 2)
-    return;
+            self.remove();
+            paths.splice(paths.indexOf(self), 1);
+          }
+          var move = divide;
 
-  // If the path is in landscape orientation, we're going to
-  // split the path horizontally, otherwise vertically.
-  size /= isLandscape ? [2, 1] : [1, 2];
+          function onResize(event) {
+            if (!loaded)
+              return;
+            project.activeLayer.removeChildren();
+            raster.fitBounds(view.bounds, true);
 
-  var path = new Path.Rectangle({
-    point: self.bounds.topLeft.floor(),
-    size: size.ceil(),
-    onMouseMove: move
-  });
-  path.fillColor = raster.getAverageColor(path);
-  paths.push(path);
+            // Create a path that fills the view filled with average color of raster.
+            paths = [];
+            paths.push(new Path.Rectangle({
+              rectangle: view.bounds,
+              fillColor: raster.getAverageColor(view.bounds),
+              onMouseMove: move
+            }));
+            
+            ticks = 0;
+            setTimeout(tick, 50);
+          }
 
-  var path = new Path.Rectangle({
-    point: isLandscape ? self.bounds.topCenter.ceil() : self.bounds.leftCenter.ceil(),
-    size: size.floor(),
-    onMouseMove: move
-  });
-  path.fillColor = raster.getAverageColor(path);
-  paths.push(path);
+          function tick() {
+            var width = 0;
+            for (var i = 0; i < paths.length; i++)
+              width = Math.max(width, paths[i].bounds.size.width);
+         
+            if (width < 2)
+              return; // Stop once all elements are very small.
 
-  self.remove();
-  paths.splice(paths.indexOf(self), 1);
-}
+            var widest = [];
+            for (var i = 0; i < paths.length; i++)
+              if (paths[i].bounds.size.width >= width)
+                widest.push(paths[i]);
 
-function onResize(event) {
-  ticks = 0;
-  if (!loaded)
-    return;
-  project.activeLayer.removeChildren();
+            for (var i = 0; i < Math.min(10, widest.length); i++) {
+              var r = Math.floor(Math.random() * widest.length);    
+              divide(widest[r], true);
+              widest.splice(r, 1);
+              view.update();
+            }
 
-  paths = [];
-
-  // Transform the raster so that it fills the bounding rectangle
-  // of the view:
-  raster.fitBounds(view.bounds, true);
-
-  // Create a path that fills the view, and fill it with
-  // the average color of the raster:
-  paths.push(new Path.Rectangle({
-    rectangle: view.bounds,
-    fillColor: raster.getAverageColor(view.bounds),
-    onMouseMove: move
-  }));
-  setTimeout(tick, 50*ticks+50);
-}
-
-function tick() {
-  ticks++;
-
-  var width = 0;
-  for (var i = 0; i < paths.length; i++)
-    width = Math.max(width, paths[i].bounds.size.width);
- 
-  if (width < 2)
-    return; // Stop once all elements are very small.
-
-  var widest = [];
-  for (var i = 0; i < paths.length; i++)
-    if (paths[i].bounds.size.width >= width)
-      widest.push(paths[i]);
-
-  for (var i = 0; i < Math.min(10, widest.length); i++) {
-    var r = randInt(0, widest.length-1);
-    divide(widest[r], true);
-    widest.splice(r, 1);
-    view.update();
-  }
-
-  if (ticks < 40)
-    setTimeout(tick, 50);
-}
-
-var move = divide;
-
-</script>
-<div class="canvas" style="z-index:-1;">
-<canvas resize="true" id="canvas-1"></canvas>
-</div>
-</div>
-</article>
-
-<div class="left" style="z-index:100; position:absolute; top:130px; color:white; font-family:Benton-Sans-Light; font-size:50px;">
-Data Mechanics
-</div>
-
-<div class="left" style="z-index:100; position:absolute; top:195px; color:white; font-family:Benton-Sans-Light; font-size:16px; width:650px;">
-Data repository and service platform for educational and research efforts that address how data can traverse institutions and pervasive computational infrastructures to inform decisions and operations within systems such as smart cities.
-</div>
-
-<div style="z-index:100; position:absolute; top:300px; margin:0 auto; width:100%;">
-<div id="content" style="background-color:white; border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC;">
-<div class="left section">
-<h2>Initial Course Offering</h2>
-<b>CAS Computer Science 591: Data Mechanics for Pervasive Systems and Urban Applications
-<br/>Spring 2016, Tue. &amp; Thu. 2 - 3:30 PM in MCS 180</b>
-<br/>
-<br/>
-The term <i>data mechanics</i> refers to the study of how data can move through institutions and computational infrastructures to inform decisions and operations (often in real time) within large systems such as cities, which can contain a variety of widely distributed embedded sensors and computational devices. Computer science and computational thinking provide a variety of tools and techniques for facilitating data collection, delivery, processing, and interpretation in application areas like urban informatics and distributed systems (e.g., traffic modelling and management, sensor networks, smart power grids, and so on):
-    <ul>
-      <li>programming tools and paradigms for assembling decision-making, optimization, and analytics algorithms that can operate on large amounts of static or streaming data;</li>
-      <li>consolidation, synchronization, and summarization of multiple data streams;</li>
-      <li>formal techniques for modeling and ensuring predictable, reliable, and provably correct behavior;</li>
-      <li>crowdsourcing and socio-adaptive system;</li>
-      <li>online and offline visualizations for presenting and examining data.</li>
-    </ul>
-Students will apply the tools and methods presented to build platforms and applications that work with data sets dealing with aspects of urban environments such as mobility (e.g., walkability), employment, traffic and parking, emissions, energy consumption, public safety, and others.
-</div>
-<div class="left section">
-<h2>Acknowledgments</h2>
-This effort exists thanks to the support and cooperation of Boston University, the Boston University Computer Science Department, the Hariri Institute for Computing, and SCOPE.
-</div>
-</div>
-<div id="footer" style="height:80px;">
-<div style="margin-top:15px;" class="left" >
-<a href="http://www.bu.edu">Boston University</a>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="http://www.bu.edu/hic">Hariri Institute for Computing</a>
-&nbsp;&nbsp;&nbsp;&nbsp;
-<a href="mailto:contact@datamechanics.org">Contact</a>
-</div>
-</div>
-</div>
+            if (ticks++ < 40)
+              setTimeout(tick, (5*ticks)+50);
+          }
+        </script>
+        <div class="canvas"><canvas resize="true" id="canvas-1"></canvas></div>
+      </div>
+    </div><!-- /#background -->
+      <div id="foreground">
+        <div id="title" class="left">Data Mechanics</div>
+        <div id="description" class="left">
+          Data repository and service platform for educational and research efforts that address how data can traverse institutions and pervasive computational infrastructures to inform decisions and operations within systems such as smart cities.
+        </div>
+        <div id="sheet">
+          <div class="left section">
+            <h2>Initial Course Offering</h2>
+            <b>Boston University, College of Arts and Sciences
+            <br/>Computer Science 591: Data Mechanics for Pervasive Systems and Urban Applications
+            <br/>Spring 2016, Tue. &amp; Thu. 2 - 3:30 PM in MCS 180</b>
+            <br/>
+            <br/>
+            The term <i>data mechanics</i> refers to the study of how data can move through institutions and computational infrastructures to inform decisions and operations (often in real time) within large systems such as cities, which can contain a variety of widely distributed embedded sensors and computational devices. Computer science and computational thinking provide a variety of tools and techniques for facilitating data collection, delivery, processing, and interpretation in application areas like urban informatics and distributed systems (e.g., traffic modelling and management, sensor networks, smart power grids, and so on):
+            <ul>
+              <li>programming tools and paradigms for assembling decision-making, optimization, and analytics algorithms that can operate on large amounts of static or streaming data;</li>
+              <li>consolidation, synchronization, and summarization of multiple data streams;</li>
+              <li>formal techniques for modeling and ensuring predictable, reliable, and provably correct behavior;</li>
+              <li>crowdsourcing and socio-adaptive system;</li>
+              <li>online and offline visualizations for presenting and examining data.</li>
+            </ul>
+            Students will apply the tools and methods presented to build platforms and applications that work with data sets dealing with aspects of urban environments such as mobility (e.g., walkability), employment, traffic and parking, emissions, energy consumption, public safety, and others.
+          </div>
+          <div class="left section">
+            <h2>Acknowledgments</h2>
+            This effort exists thanks to the support and cooperation of <a href="http://www.bu.edu">Boston University</a>, the <a href="http://www.bu.edu/cs/">Boston University Computer Science Department</a>, the <a href="http://www.bu.edu/hic">Hariri Institute for Computing</a>, and <a href="http://www.bu.edu/hic/research/scope/">SCOPE</a> (NSF Award <a href="http://www.nsf.gov/awardsearch/showAward?AWD_ID=1430145">#1430145</a>).
+          </div>
+        </div><!-- /#sheet -->
+        <div id="footer" class="left">
+          <a href="http://www.bu.edu">Boston University</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="http://www.bu.edu/hic">Hariri Institute for Computing</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <a href="mailto:contact@datamechanics.org">Contact</a>
+        </div><!-- /#footer -->
+      </div><!-- /#foreground -->
   </body>
 </html>
