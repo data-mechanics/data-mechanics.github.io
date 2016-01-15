@@ -32,6 +32,15 @@
   font-style: normal;
   font-weight: normal;
 }
+@font-face {
+  font-family: "Veneer-Extras";
+  src: url("http://www.bu.edu/cdn/fonts/Veneer-Extras/2B35AA_1_0.eot");
+  src: url("http://www.bu.edu/cdn/fonts/Veneer-Extras/2B35AA_1_0.eot?") format("embedded-opentype"),
+       url("http://www.bu.edu/cdn/fonts/Veneer-Extras/2B35AA_1_0.woff") format("woff"),
+       url("http://www.bu.edu/cdn/fonts/Veneer-Extras/2B35AA_1_0.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
 html, body { height:100%; margin:0; color:#FFFFFF; font-family:Benton-Sans-Light,Helvetica,sans-serif; }
 /* body { overflow:hidden; } */
 body #background { position:absolute; top:0; left:0; right:0; bottom:0; width:auto; overflow:hidden; margin-bottom:0; padding:0; }
@@ -46,7 +55,7 @@ body #foreground #sheet .section { width:650px; padding-top:20px; font-family:Be
 body #foreground #sheet .section h2 { color:#888888; font-family:Benton-Sans-Light,Helvetica,sans-serif; }
 body #foreground #sheet .section ul { list-style:none; padding:8px 0px 8px 0px; margin:0; }
 body #foreground #sheet .section li { padding-left:1.5em; text-indent:-1em; }
-body #foreground #sheet .section li:before { content:"4"; color:#888888; font-family:"Webdings"; }
+body #foreground #sheet .section li:before { content:"- "; color:#888888; font-family:"Veneer-Extras"; }
 body #foreground #sheet .section a { color:#4E759A; text-decoration:none; }
 body #foreground #sheet .section a:hover { text-decoration:underline; }
 body #foreground #footer { height:80px; padding-top:15px; font-family:Benton-Sans-Regular,Helvetica,sans-serif; font-size:12px; }
