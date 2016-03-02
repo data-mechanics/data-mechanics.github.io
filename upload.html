@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>File uploader for Data Mechanics</title>
+	<style type="text/css">
+	body {
+		font-family: Verdana, sans-serif;
+		color: #999;
+		font-size: 16px;
+		margin: 100px auto;
+		width: 820px;
+	}
+	#drop-target {
+		border: 10px dashed #666;
+		transition: border-color 0.5s;
+		text-align: center;
+		height: 300px;
+		display: table-cell;
+		vertical-align: middle;
+		font-size: 32px;
+		width: inherit;
+	}
+	#drop-target.dragenter {
+		border-color: #A6DE2A;
+	}
+	#drop-target.dragdefault {
+		border-color: #666;
+	}
+	#drop-target.dragerror {
+		border-color: #C8120B;
+	}
+	#listing {
+		margin-top: 50px;
+	}
+	</style>
+</head>
+<body>
+	<h1>File uploader for Data Mechanics</h1>
+	<div id="drop-target" class="dragdefault">Drop files/folders to upload<br/>(Chrome only)</div>
+	<div id="listing"></div>
+
+	<script type="text/javascript">
+		var S3BL_IGNORE_PATH = true;
+		var BUCKET_URL = 'http://datamechanics.io.s3.amazonaws.com';
+		var BUCKET_PRETTY_URL = 'http://datamechanics.io';
+		var S3B_ROOT_DIR = 'data/';
+		var ACCESS_KEY = 'AKIAIEWBGYT6WSK4JCPQ';
+		var POLICY = 'eyJleHBpcmF0aW9uIjoiMjAyMC0wMS0wMVQwMDowMDowMFoiLCJjb25kaXRpb25zIjpbeyJidWNrZXQiOiJkYXRhbWVjaGFuaWNzLmlvIn0sWyJzdGFydHMtd2l0aCIsIiRrZXkiLCIiXSx7ImFjbCI6InB1YmxpYy1yZWFkIn0sWyJzdGFydHMtd2l0aCIsIiRDb250ZW50LVR5cGUiLCIiXSxbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwwLDEwNDg1NzYwMF1dfQ==';
+		var SIGNATURE = 'sowOs+Y7myxS4TvT9bWE0ls1HWY=';
+	</script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src=//Hariri-Institute-SAIL.github.io/s3-bucket-listing/list.js></script>
+	<script>
+	$(function() {
+		'use strict';
+
+		var dragDrop = $('#drop-target'),
+			prefix = getQueryVariable('prefix'),
+			numFiles = 0,
+			currentFile = 0;
+
+		function uploadFile(file, fileName) {
+			console.log('Uploading file:', fileName);
+
+			// Keep track of amount of files we're uploading so we can refresh the listing at the end
+			numFiles++;
+
+			$('#drop-target').text('Uploading file ' + (currentFile + 1) + ' of ' + numFiles);
+
+			var fd = new FormData();
+			fd.append('key', fileName);
+			fd.append('acl', 'public-read');
+			fd.append('Content-Type', file.type);
+			fd.append('AWSAccessKeyId', ACCESS_KEY);
+			fd.append('policy', POLICY)
+			fd.append('signature', SIGNATURE);
+			fd.append('file', file);
+
+			var xhr = new XMLHttpRequest();
+			xhr.addEventListener("load", onTransferComplete);
+			xhr.open('POST', BUCKET_URL, true);
+			xhr.send(fd);
+		}
+
+		function onTransferComplete(e) {
+			// Another file done uploading
+			currentFile++;
+			// Check if all files have been uploaded and refresh listing
+			if (currentFile === numFiles) {
+				$('#drop-target').text('All done!');
+				currentFile = numFiles = 0;
+				getS3Data();
+			}
+		}
+
+		function traverseFileTree(item, path) {
+			path = path || '';
+			if (item.isFile) {
+				// Get file
+				item.file(function(file) {
+					//console.log('File:', path + file.name);
+					uploadFile(file, S3B_ROOT_DIR + prefix + path + file.name);
+				});
+			} else if (item.isDirectory) {
+				// Get folder contents
+				var dirReader = item.createReader();
+				dirReader.readEntries(function(entries) {
+					for (var i = 0; i < entries.length; i++) {
+						traverseFileTree(entries[i], path + item.name + '/');
+					}
+				});
+			}
+		}
+
+		function getQueryVariable(variable) {
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split("=");
+				if (pair[0] == variable) {
+					return pair[1];
+				}
+			}
+			return '';
+		}
+
+		function onDocDragOver(e) {
+			dragDrop.removeClass('dragdefault');
+			dragDrop.addClass('dragerror');
+			return false;
+		}
+
+		function onDocDrop(e) {
+			dragDrop.removeClass('dragerror');
+			dragDrop.removeClass('dragenter');
+			e.stopPropagation();
+			e.preventDefault();
+		}
+
+		function onDragOver(e) {
+			dragDrop.removeClass('dragerror');
+			dragDrop.removeClass('dragdefault');
+			dragDrop.addClass('dragenter');
+			return false;
+		}
+
+		function onDragLeave(e) {
+			dragDrop.removeClass('dragenter');
+			return false;
+		}
+
+		function onDrop(e) {
+			e.dataTransfer = e.originalEvent.dataTransfer;
+			e.preventDefault();
+			
+			var items = e.dataTransfer.items;
+			var l = items.length;
+			for (var i = 0; i < l; i++) {
+				var item = items[i].webkitGetAsEntry() || items[i].mozGetAsEntry();
+				if (item) {
+					traverseFileTree(item);
+				}
+			}
+		}
+
+		dragDrop.on('dragover', onDragOver);
+		dragDrop.on('dragleave', onDragLeave);
+		dragDrop.on('drop', onDrop);
+		$(document).on('dragover', onDocDragOver);
+		$(document).on('dragleave', onDocDrop);
+		$(document).on('drop', onDocDrop);
+	});
+	</script>
+</body>
+</html>
