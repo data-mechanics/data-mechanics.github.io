@@ -53,11 +53,12 @@ body #foreground { position:absolute; top:130px; z-index:100; width:100%; margin
 body #foreground #title { width:700px; padding-bottom:5px; display:inline-block; text-align:left; font-size:50px; }
 body #foreground #description { width:700px; padding-bottom:40px; display:inline-block; text-align:left; font-size:16px; }
 body #foreground #sheet { margin:0 auto; padding-bottom:40px; border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; color:#000000; background-color:white; }
-body #foreground #sheet .section { width:700px; padding-top:20px; display:inline-block; text-align:left; font-family:Benton-Sans-Regular,Helvetica,sans-serif; font-size:14px; }
+body #foreground #sheet .section { width:700px; padding-top:0px; display:inline-block; text-align:left; font-family:Benton-Sans-Regular,Helvetica,sans-serif; font-size:14px; }
 body #foreground #sheet .section h2 { color:#888888; font-family:Benton-Sans-Light,Helvetica,sans-serif; }
 body #foreground #sheet .section ul { list-style:none; padding:8px 0px 8px 0px; margin:0; }
 body #foreground #sheet .section li { padding-left:1.5em; text-indent:-1em; }
-body #foreground #sheet .section li:before { content:"- "; color:#888888; font-family:"Veneer-Extras"; }
+body #foreground #sheet .section li:before { content:"-- "; color:#888888; font-family:"Arial",Sans-serif; }
+body #foreground #sheet .section table { padding:5px; border-spacing:5px; font-size:12px; }
 body #foreground #sheet .section a { color:#4E759A; text-decoration:none; }
 body #foreground #sheet .section a:hover { text-decoration:underline; }
 body #foreground #footer { width:700px; height:80px; padding-top:15px; display:inline-block; text-align:left; font-family:Benton-Sans-Regular,Helvetica,sans-serif; font-size:12px; }
@@ -87,6 +88,7 @@ body #foreground #footer a:hover { text-decoration:underline; }
           var paths = [];
           var raster = new Raster('archnet.jpg');
           var loaded = false;
+          var minSize = 10; // Originally, this was 2.
 
           raster.on('load', function() { loaded = true; onResize(); });
           raster.visible = false;
@@ -101,7 +103,7 @@ body #foreground #footer a:hover { text-decoration:underline; }
             var size = self.bounds.size.clone();
             var isLandscape = size.width > size.height;
           
-            if (size.width < 2 || size.height < 2)
+            if (size.width < minSize || size.height < minSize)
               return;
 
             // If the path is in landscape orientation, we're going to
@@ -181,22 +183,149 @@ body #foreground #footer a:hover { text-decoration:underline; }
         Data repository and service platform for educational and research efforts that address how data can traverse institutions and pervasive computational infrastructures to inform decisions and operations within systems such as smart cities.
       </div>
       <div id="sheet">
+        <br/>
         <div class="section">
-          <h2>Initial Course Offering</h2>
-          <b>Boston University, College of Arts and Sciences
-          <br/>Computer Science 591 L1: <a href="http://cs-people.bu.edu/lapets/591/">Data Mechanics for Pervasive Systems and Urban Applications</a>
-          <br/>Spring 2016, Tue. &amp; Thu. 2 - 3:30 PM in MCS B33</b>
-          <br/>
-          <br/>
-          The term <i>data mechanics</i> refers to the study of how data can move through institutions and computational infrastructures to inform decisions and operations (often in real time) within large systems such as cities, which can contain a variety of widely distributed embedded sensors and computational devices. Computer science and computational thinking provide a variety of tools and techniques for facilitating data collection, delivery, processing, and interpretation in application areas like urban informatics and distributed systems (e.g., traffic modelling and management, sensor networks, smart power grids, and so on):
-          <ul>
-            <li>programming tools and paradigms for assembling decision-making, optimization, and analytics algorithms that can operate on large amounts of static or streaming data;</li>
-            <li>consolidation, synchronization, and summarization of multiple data streams;</li>
-            <li>formal techniques for modeling and ensuring predictable, reliable, and provably correct behavior;</li>
-            <li>crowdsourcing and socio-adaptive system;</li>
-            <li>online and offline visualizations for presenting and examining data.</li>
-          </ul>
-          Students will apply the tools and methods presented to build platforms and applications that work with data sets dealing with aspects of urban environments such as mobility (e.g., walkability), employment, traffic and parking, emissions, energy consumption, public safety, and others.
+          <h2>Spring 2016 Course Offering</h2>
+          <b>
+            Boston University, College of Arts and Sciences
+            <br/>Computer Science 591 L1: <a href="http://cs-people.bu.edu/lapets/591/">Data Mechanics for Pervasive Systems and Urban Applications</a>
+            <!-- <br/>Spring 2016, Tue. &amp; Thu. 2 - 3:30 PM in MCS B33 -->
+          </b>
+          <p>
+            Students applied techniques and methods presented during the course to retrieve and derive data sets, implement optimization algorithms, perform analyses, and create visualizations. All the data retrieved or generated for the individual projects was collected within a unifying framework consisting of a shared database and data set provenance tracking conventions.
+          </p>
+          <p>
+            Individual projects were programmed as forks of a <a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two">shared GitHub repository</a>, and each project was submitted via a <a href="https://help.github.com/articles/using-pull-requests/">pull request</a>. The source for the submitted version of each of the projects listed below can be viewed by going to the corresponding subdirectory of the overall GitHub repository (note that students are credited in alphabetical order).
+          </p>
+          <table style="">
+            <tr>
+              <td>
+                <b>Drones for Medical and Police Services.</b>
+                <br/>Tabor Beaudry.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/tbeaudry">GitHub</a>
+              </td>
+              <td>
+                <b>Transportation and Food Establishments.</b>
+                <br/>Yui Chi Tiffany Lo.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/loyuichi">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Highway out of the Danger Zone.</b>
+                <br/>Erik Brakke and Tyler Waltze.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/ebrakke_twaltze">GitHub</a>
+              </td>
+              <td>
+                <b>Crime Incidence and Lighting.</b>
+                <br/>Thomas Hsu and Nicholas Louie.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/nlouie_thsu8">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Evaluating Boston Neighborhoods.</b>
+                <br/>Raaid Arshad and Michael Clawar.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/mjclawar_rarshad">GitHub</a>
+              </td>
+              <td>
+                <b>Average Income and Crime Incidence.</b>
+                <br/>Linshan Jiang and Tianyou Luo.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/linshan_luoty">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Characterizing MBTA Stop Safety.</b>
+                <br/>Adam Elass.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/atelass">GitHub</a>
+              </td>
+              <td>
+                <b>Neighborhood Classification.</b>
+                <br/>Jasper Burns and Daren McCulley.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/djmcc_jasper">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Cristina Estupinan and Steven Jarvis.</b>
+                <br/>Optimizing Green Line T Stops.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/ciestu12_sajarvis">GitHub</a>
+              </td>
+              <td>
+                <b>Hospitals, Traffic Jams, and Property Values.</b>
+                <br/>Joshua Mah, Joseph Muruguru, and Timothy Pacius.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/jmuru1_joshmah_tpacius">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>City Employee Earnings over Time.</b>
+                <br/>Yihong Guo.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/billguo">GitHub</a>
+              </td>
+              <td>
+                <b>Graph Metrics for the Public Transportation Network.</b>
+                <br/>Nikolaj Volgushev.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/nikolaj">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Boston Food Resources in Relation to Demographics.</b>
+                <br/>Johnson Lam and Kathleen McKay.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/jlam17_mckay678">GitHub</a>
+              </td>
+              <td>
+                <b>Improving Bicycle Route Safety.</b>
+                <br/>Enze Yan.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/enze">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Geosocial Data of Boston.</b>
+                <br/>Benjamin Lawson.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/balawson">GitHub</a>
+              </td>
+              <td>
+                <b>Scoring Age-Friendly Neighborhoods in Boston.</b>
+                <br/>Jacqueline You.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/jgyou">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Classifying and Identifying Zipcodes by Constraints.</b>
+                <br/>Jonathan Liu and Kyle Mann.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/jtsliu_kmann">GitHub</a>
+              </td>
+              <td>
+                <b>Health and Safety of Boston Restaurants.</b>
+                <br/>Erica Wivagg and Yu Zhou.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/ekwivagg_yuzhou7">GitHub</a>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+        <br/>
+        <div class="section">
+          <h2>Overview</h2>
+          <p>
+            The term <i>data mechanics</i> refers to the study of how data can move through institutions and computational infrastructures to inform decisions and operations (often in real time) within large systems such as cities, which can contain a variety of widely distributed embedded sensors and computational devices. Computer science and computational thinking provide a variety of tools and techniques for facilitating data collection, delivery, processing, and interpretation in application areas like urban informatics and distributed systems (e.g., traffic modelling and management, sensor networks, smart power grids, and so on):
+            <ul>
+              <li>programming tools and paradigms for assembling decision-making, optimization, and analytics algorithms that can operate on large amounts of static or streaming data;</li>
+              <li>consolidation, synchronization, and summarization of multiple data streams;</li>
+              <li>formal techniques for modeling and ensuring predictable, reliable, and provably correct behavior;</li>
+              <li>crowdsourcing and socio-adaptive system;</li>
+              <li>online and offline visualizations for presenting and examining data.</li>
+            </ul>
+            In each iteration of a data mechanics course, students will apply the tools and methods presented to build platforms and applications that work with data sets dealing with aspects of urban environments such as mobility (e.g., walkability), employment, traffic and parking, emissions, energy consumption, public safety, and others.
+          </p>
         </div>
         <br/>
         <div class="section">
