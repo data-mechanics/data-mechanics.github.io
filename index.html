@@ -135,25 +135,22 @@ body #foreground #footer a:hover { text-decoration:underline; }
             if (!loaded)
               return;
             project.activeLayer.removeChildren();
+            raster.fitBounds(view.bounds, true);
 
-            // Delay creation of canvas to make sure bounds are up to date.
-            setTimeout(function() {
-
-              raster.fitBounds(view.bounds, true);
-
-              // Create a path that fills the view filled with average color of raster.
-              paths = [];
-              paths.push(new Path.Rectangle({
-                rectangle: view.bounds,
-                fillColor: raster.getAverageColor(view.bounds),
-                onMouseMove: move
-              }));
-              ticks = 0;
-              setTimeout(tick, 50);
-            }, 750);
+            // Create a path that fills the view filled with average color of raster.
+            paths = [];
+            paths.push(new Path.Rectangle({
+              rectangle: view.bounds,
+              fillColor: raster.getAverageColor(view.bounds),
+              onMouseMove: move
+            }));
+            ticks = 0;
+            setTimeout(tick, 50);
           }
 
           function tick() {
+            raster.fitBounds(view.bounds, true);
+
             var width = 0;
             for (var i = 0; i < paths.length; i++)
               width = Math.max(width, paths[i].bounds.size.width);
