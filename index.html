@@ -50,19 +50,21 @@ body #background { position:absolute; top:0; left:0; right:0; bottom:0; width:au
 body #background .paperscript { height:100%; margin-bottom:0; }
 body #background .canvas, body #background canvas[resize] { position:fixed; z-index:-1; width:100%; height:100%; background-color:#7B808A; }
 body #foreground { position:absolute; top:130px; z-index:100; width:100%; margin-left:0 auto; text-align:center; } 
-body #foreground #title { width:700px; padding-bottom:5px; display:inline-block; text-align:left; font-size:50px; cursor:default; }
-body #foreground #description { width:700px; padding-bottom:40px; display:inline-block; text-align:left; font-size:16px; cursor:default; }
+body #foreground #title { width:900px; padding-bottom:5px; display:inline-block; text-align:left; font-size:50px; cursor:default; }
+body #foreground #description { width:900px; padding-bottom:40px; display:inline-block; text-align:left; font-size:16px; cursor:default; }
 body #foreground #sheet { margin:0 auto; padding-bottom:40px; border-top:1px solid #CCCCCC; border-bottom:1px solid #CCCCCC; color:#000000; background-color:white; }
-body #foreground #sheet .section { width:700px; padding-top:0px; display:inline-block; text-align:left; font-family:Benton-Sans-Regular,Helvetica,sans-serif; font-size:14px; }
+body #foreground #sheet .section { width:900px; padding-top:0px; display:inline-block; text-align:left; font-family:Benton-Sans-Regular,Helvetica,sans-serif; font-size:14px; }
 body #foreground #sheet .section h2 { color:#888888; font-family:Benton-Sans-Light,Helvetica,sans-serif; }
 body #foreground #sheet .section ul { list-style:none; padding:8px 0px 8px 0px; margin:0; }
 body #foreground #sheet .section li { padding-left:1.5em; text-indent:-1em; }
 body #foreground #sheet .section li:before { content:"-- "; color:#888888; font-family:"Arial",Sans-serif; }
+body #foreground #sheet .section p { text-align:justify; }
 body #foreground #sheet .section table { padding:5px; border-spacing:5px; font-size:12px; }
+body #foreground #sheet .section table td { padding:2px 10px 2px 10px; }
 body #foreground #sheet .section a { color:#4E759A; text-decoration:none; }
 body #foreground #sheet .section a:hover { text-decoration:underline; }
 body #foreground #sheet .section .announce { font-size:18px; color:brown; padding:15px; }
-body #foreground #footer { width:700px; height:80px; padding-top:15px; display:inline-block; text-align:left; font-family:Benton-Sans-Regular,Helvetica,sans-serif; font-size:12px; }
+body #foreground #footer { width:900px; height:80px; padding-top:15px; display:inline-block; text-align:left; font-family:Benton-Sans-Regular,Helvetica,sans-serif; font-size:12px; }
 body #foreground #footer a { color:#FFFFFF; text-decoration:none; }
 body #foreground #footer a:hover { text-decoration:underline; }
     </style>
@@ -194,14 +196,185 @@ body #foreground #footer a:hover { text-decoration:underline; }
           <b>
             Boston University, College of Arts and Sciences
             <br/>Computer Science 591 L1: <a href="http://cs-people.bu.edu/lapets/591/">Data Mechanics for Pervasive Systems and Urban Applications</a>
-            <br/>Tue. &amp; Thu. 9:30 - 11 AM in CAS B20
+            <!--<br/>Tue. &amp; Thu. 9:30 - 11 AM in CAS B20-->
           </b>
           <p>
-            The second iteration of the course will follow a syllabus that is very similar to the first. However, there will be more extensive use of dedicated libraries and tools built specifically for creating an integrated platform that combines all the student projects. Furthermore, students will be able to draw upon, improve, and incorporate data sets and algorithms assembled by students during the previous iteration of the course.
+            The second iteration of the course followed a syllabus that is very similar to that of the first iteration. However, there was more extensive use of dedicated libraries and tools built specifically for creating an integrated platform that combines all the student projects. Furthermore, students had the option to use data sets made available by other cities, and were be able to draw upon, improve, and incorporate data sets and algorithms assembled by students during the previous iteration of the course.
           </p>
-          <p class="announce">
+          <!--p class="announce">
             <b>The poster session for this semester will take place 3-5 PM on Friday, December 9th at the <a href="https://www.bu.edu/hic/directions/">Hariri Institute for Computing</a>.</b> All are welcome to visit and learn more about this semester's student projects.
-          </p>
+          </p-->
+          <table>
+            <tr>
+              <td>
+                <b>Statistical Correlation of Drug Crime and Youth in the City of Boston.</b>
+                <br/>Aditi Dass, Andrew Lee, Benjamin Li, and Tony Yao.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/aditid_benli95_teayoon_tyao">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/aditid_benli95_teayoon_tyao/2016-fal-aditid_benli95_teayoon_tyao-poster.pdf">Poster</a>
+              </td>
+              <td>
+                <b>Using <i>k</i>-means to Determine New Hospital Locations.</b>
+                <br/>Michael Gerakis, Patrick Gomes, and Raphael Baysa.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/mgerakis_pgomes94_raph737">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/mgerakis_pgomes94_raph737/2016-fal-mgerakis_pgomes94_raph737-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/mgerakis_pgomes94_raph737/2016-fal-mgerakis_pgomes94_raph737-report.pdf">Report</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Algorithmic Optimizations of Boston's Public Bus System.</b>
+                <br/>Adrian Law, Mark Bestavros, and Tyrone Hou.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/alaw_markbest_tyroneh">GitHub</a>
+              </td>
+              <td>
+                <b>Reducing the Number of Car Accidents.</b>
+                <br/>Ivan Uvarov and Stephanie Chiao.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/schiao_uvarovis">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/schiao_uvarovis/2016-fal-schiao_uvarovis-poster.pdf">Poster</a>
+                | <a href="">Report</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>What is a Community?</b>
+                <br/>Asselya Aliyeva, Benjamin Owens, David Wang, and Jennifer Tsui.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/aliyevaa_bsowens_dwangus_jgtsui">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/aliyevaa_bsowens_dwangus_jgtsui/2016-fal-aliyevaa_bsowens_dwangus_jgtsui-poster.pdf">Poster</a>
+              </td>
+              <td>
+                <b>Average Income in Neighborhoods and Other Factors.</b>
+                <br/>Shreya Ramesh.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/shreya">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/shreya/2016-fal-shreya-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/shreya/2016-fal-shreya-report.pdf">Report</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>How Streetlights Deter Crime.</b>
+                <br/>Aleksander Skjoelsvik and Ying Hang Eng.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/alsk_yinghang">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/alsk_yinghang/2016-fal-alsk_yinghang-poster.pdf">Poster</a>
+              </td>
+              <td>
+                <b>Crimes and Firearm Recovery in Boston.</b>
+                <br/>Nathan Galloway, Amanda Doss, and Sanam Patel.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/manda094_nwg_patels95">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/manda094_nwg_patels95/2016-fal-manda094_nwg_patels95-poster.pdf">Poster</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Optimal Trash Collection Installation Sites.</b>
+                <br/>Jacquelyn Andrade and Joseph Cho.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/andradej_chojoe">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/andradej_chojoe/2016-fal-andradej_chojoe-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/andradej_chojoe/2016-fal-andradej_chojoe-report.pdf">Report</a>
+              </td>
+              <td>
+                <b>Crime Clustering, its Shifting Pattern, and General Housing Evaluation.</b>
+                <br/>Li Liu and Sibo Zhu.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/ll0406_siboz">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/ll0406_siboz/2016-fal-ll0406_siboz-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/ll0406_siboz/2016-fal-ll0406_siboz-report.pdf">Report</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Exploring New York City Transit.</b>
+                <br/>Anurag Prasad and Jarrod Lewis.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/anuragp1_jl101995">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/anuragp1_jl101995/2016-fal-anuragp1_jl101995-poster.pdf">Poster</a>
+              </td>
+              <td>
+                <b>Factors that Influence the Number of Crime Incidents.</b>
+                <br/>Joe Zhou and Ekaterina Prokopeva.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/jzhou94_katerin">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/jzhou94_katerin/2016-fal-jzhou94_katerin-poster.pdf">Poster</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Relationship Between Crimes and Service Requests.</b>
+                <br/>Arjun Lamba.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/arjunlam">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/arjunlam/2016-fal-arjunlam-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/arjunlam/2016-fal-arjunlam-report.pdf">Report</a>
+              </td>
+              <td>
+                <b>Measuring Child-Friendliness in Boston Neighborhoods.</b>
+                <br/>Ji Eun Yang and Robin Liu.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/jyaang_robinliu">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/jyaang_robinliu/2016-fal-jyaang_robinliu-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/jyaang_robinliu/2016-fal-jyaang_robinliu-report.pdf">Report</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>How Income Per Capita Affects Alternative Methods of Transporation.</b>
+                <br/>Liam DeBeasi, Simon Nichols, Arman Sanentz, and Molly Shopper.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/asanentz_ldebeasi_mshop_sinichol">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/asanentz_ldebeasi_mshop_sinichol/2016-fal-asanentz_ldebeasi_mshop_sinichol-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/asanentz_ldebeasi_mshop_sinichol/2016-fal-asanentz_ldebeasi_mshop_sinichol-report.pdf">Report</a>
+              </td>
+              <td>
+                <b>City of Boston Services: Optimal Police Patrol Allocation and Inspection Analysis.</b>
+                <br/>Stephanie Alibrandi and Javier Arguello.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/jas91_smaf91">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/jas91_smaf91/2016-fal-jas91_smaf91-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/jas91_smaf91/report.md">Report</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Public Facilities, Crimes, and Average Income.</b>
+                <br/>Yehui Huang, Yingqiao Xiong, Hongyu Zhou, and Chang Gao.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/aydenbu_dichgao_huangyh_zzzbu">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/aydenbu_dichgao_huangyh_zzzbu/2016-fal-aydenbu_dichgao_huangyh_zzzbu-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/aydenbu_dichgao_huangyh_zzzbu/2016-fal-aydenbu_dichgao_huangyh_zzzbu-report.pdf">Report</a>
+              </td>
+              <td>
+                <b>Boston Crime Rates in Relation to Hospitals, Police Districts, and Property Value.</b>
+                <br/>George Gelinas.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/ggelinas">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/ggelinas/2016-fal-ggelinas-poster.pdf">Poster</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>Research of Factors Correlated with Crime Incidence in the Boston Area.</b>
+                <br/>Bowen Yang, Jiadong Chen, Xiao Lu.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/boman_chenjd_xiaol">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/boman_chenjd_xiaol/2016-fal-boman_chenjd_xiaol-report.pdf">Report</a>
+              </td>
+              <td>
+                <b>Relationship Between Crimes and Service Requests.</b>
+                <br/>Kristel Tan, Nisa Gurung, Yao Zhang, Emily Hou.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/emilyh23_ktan_ngurung_yazhang">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/emilyh23_ktan_ngurung_yazhang/2016-fal-emilyh23_ktan_ngurung_yazhang-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/emilyh23_ktan_ngurung_yazhang/2016-fal-emilyh23_ktan_ngurung_yazhang-report.pdf">Report</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <b>A Characterization of Neighborhood Wealth and Optimization of Resource Distribution in Boston.</b>
+                <br/>Cody Karjadi and John Gonsalves.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/ckarjadi_johnnyg7">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/ckarjadi_johnnyg7/2016-fal-ckarjadi_johnnyg7-poster.pdf">Poster</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/ckarjadi_johnnyg7/2016-fal-ckarjadi_johnnyg7-report.pdf">Report</a>
+              </td>
+              <td>
+                <b>Evaluation of Crime Incidences in Boston.</b>
+                <br/>Calvin Liang and Kevin Leung.
+                <br/><a href="https://github.com/Data-Mechanics/course-2016-fal-proj/tree/master/cyung20_kwleung">GitHub</a>
+                | <a href="https://github.com/Data-Mechanics/course-2016-fal-proj/blob/master/cyung20_kwleung/2016-fal-cyung20_kwleung-poster.pdf">Poster</a>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
         </div>
         <br/>
         <div class="section">
@@ -215,7 +388,7 @@ body #foreground #footer a:hover { text-decoration:underline; }
             Students applied techniques and methods presented during the course to retrieve and derive data sets, implement optimization algorithms, perform analyses, and create visualizations. All the data retrieved or generated for the individual projects was collected within a unifying framework consisting of a shared database and data set provenance tracking conventions.
           </p>
           <p>
-            Individual projects were programmed as forks of a <a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two">shared GitHub repository</a>, and each project was submitted via a <a href="https://help.github.com/articles/using-pull-requests/">pull request</a>. The source for the submitted version of each of the projects listed below can be viewed by going to the corresponding subdirectory of the overall GitHub repository (note that students are credited in alphabetical order).
+            Individual projects were programmed as forks of a <a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two">shared GitHub repository</a>, and each project was submitted via a <a href="https://help.github.com/articles/about-pull-requests/">pull request</a>. The source for the submitted version of each of the projects listed below can be viewed by going to the corresponding subdirectory of the overall GitHub repository (note that students are credited in alphabetical order).
           </p>
           <table>
             <tr>
@@ -232,8 +405,6 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/loyuichi">GitHub</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/loyuichi/2016-spr-loyuichi-report.pdf">Report</a>
               </td>
-            </tr>
-            <tr>
               <td>
                 <b>Highway out of the Danger Zone.</b>
                 <br/>Erik Brakke and Tyler Waltze.
@@ -241,6 +412,8 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/ebrakke_twaltze/2016-spr-ebrakke_twaltze-poster.pdf">Poster</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/ebrakke_twaltze/2016-spr-ebrakke_twaltze-report.pdf">Report</a>
               </td>
+            </tr>
+            <tr>
               <td>
                 <b>Crime Incidence and Lighting.</b>
                 <br/>Thomas Hsu and Nicholas Louie.
@@ -248,8 +421,6 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/nlouie_thsu8/2016-spr-nlouie_thsu8-poster.pdf">Poster</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/nlouie_thsu8/2016-spr-nlouie_thsu8-report.pdf">Report</a>
               </td>
-            </tr>
-            <tr>
               <td>
                 <b>Evaluating Boston Neighborhoods.</b>
                 <br/>Raaid Arshad and Michael Clawar.
@@ -279,8 +450,6 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 <br/><a href="https://github.com/Data-Mechanics/course-2016-spr-proj-two/tree/master/djmcc_jasper">GitHub</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/djmcc_jasper/2016-spr-djmcc_jasper-report.pdf">Report</a>
               </td>
-            </tr>
-            <tr>
               <td>
                 <b>Optimizing Green Line T Stops.</b>
                 <br/>Cristina Estupinan and Steven Jarvis.
@@ -288,6 +457,8 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/ciestu12_sajarvis/2016-spr-ciestu12_sajarvis-poster.pdf">Poster</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/ciestu12_sajarvis/2016-spr-ciestu12_sajarvis-report.pdf">Report</a>
               </td>
+            </tr>
+            <tr>
               <td>
                 <b>Hospitals, Traffic Jams, and Property Values.</b>
                 <br/>Joshua Mah, Joseph Muruguru, and Timothy Pacius.
@@ -295,8 +466,6 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/jmuru1_joshmah_tpacius/2016-spr-jmuru1_joshmah_tpacius-poster.pdf">Poster</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/jmuru1_joshmah_tpacius/2016-spr-jmuru1_joshmah_tpacius-report.pdf">Report</a>
               </td>
-            </tr>
-            <tr>
               <td>
                 <b>City Employee Earnings over Time.</b>
                 <br/>Yihong Guo.
@@ -325,8 +494,6 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/enze/2016-spr-enze-poster.pdf">Poster</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/enze/2016-spr-enze-report.pdf">Report</a>
               </td>
-            </tr>
-            <tr>
               <td>
                 <b>Geosocial Data of Boston.</b>
                 <br/>Benjamin Lawson.
@@ -334,6 +501,8 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/balawson/2016-spr-balawson-poster.pdf">Poster</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/balawson/2016-spr-balawson-report.pdf">Report</a>
               </td>
+            </tr>
+            <tr>
               <td>
                 <b>Scoring Age-Friendly Neighborhoods in Boston.</b>
                 <br/>Jacqueline You.
@@ -341,8 +510,6 @@ body #foreground #footer a:hover { text-decoration:underline; }
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/jgyou/2016-spr-jgyou-poster.pdf">Poster</a>
                 | <a href="https://github.com/Data-Mechanics/course-2016-spr-proj/blob/master/jgyou/2016-spr-jgyou-report.pdf">Report</a>
               </td>
-            </tr>
-            <tr>
               <td>
                 <b>Classifying and Identifying Zipcodes by Constraints.</b>
                 <br/>Jonathan Liu and Kyle Mann.
