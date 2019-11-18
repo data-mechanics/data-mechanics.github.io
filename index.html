@@ -5,8 +5,6 @@
     <meta content="all" name="robots" />
     <title>Data Mechanics</title>
     <link rel="shortcut icon" type="image/x-icon" href="data:image/x-icon;base64,iVBORw0KGgo="><!-- Suppress browser favicon.ico request. -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/vs.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
     <style>
       @font-face {
         font-family: "Benton-Sans-Light";
@@ -68,9 +66,8 @@
       body #foreground #footer a { color:#FFFFFF; text-decoration:none; }
       body #foreground #footer a:hover { text-decoration:underline; }
     </style>
-    <script src="//paperjs.org/assets/js/jquery.js"></script>
-    <script src="//paperjs.org/assets/js/paper.js"></script>
-    <script src="//paperjs.org/assets/js/scripts.js"></script>
+    <script src="https://paperjs.org/assets/js/jquery.js"></script>
+    <script src="paper.js"></script>
     <script>
       var favIcon = "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAADmSURBVHjaYpy2Yi8DKYCH5Q8Xy1/i1QMEEBMDjQFAANHcAoAAorkFAAFEcwsAAojmFgAEEM0tAAggmlsAEEA0twAggGhuAUAA0dwCgACiuQUAAURzCwACiOYWAAQQzS0ACCCWr1++kKTh+98f8uK8xKsHCCCWqxfPk2SBlBAv88u3xKsHCCCaBxFAANHcAoAAorkFAAFEcwsAAojmFgAEEOkWMJKmHCCASLaAkUQLAAKI5kEEEEA0twAggGgeBwABRLIF//+Tph4ggEi24M/ffySpBwggmscBQADR3AKAAKK5BQABBgBAFRPifXeuKAAAAABJRU5ErkJggg==";
       var docHead = document.getElementsByTagName('head')[0];
@@ -79,7 +76,6 @@
       newLink.type = 'image/x-icon';
       newLink.href = 'data:image/png;base64,'+favIcon;
       docHead.appendChild(newLink);
-      hljs.initHighlightingOnLoad();
     </script>
     <base target="_parent">
   </head>
